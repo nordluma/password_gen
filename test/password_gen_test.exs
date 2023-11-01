@@ -78,4 +78,14 @@ defmodule PasswordGenTest do
 
     assert {:error, _error} = PasswordGen.generate(options)
   end
+
+  test "returns error when 1 option is invalid" do
+    options = %{
+      "length" => "5",
+      "numbers" => "true",
+      "invalid" => "true"
+    }
+
+    assert {:error, _error} = PasswordGen.generate(options)
+  end
 end
