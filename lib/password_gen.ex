@@ -1,18 +1,44 @@
 defmodule PasswordGen do
   @moduledoc """
-  Documentation for `PasswordGen`.
+  Generates a random password depending on the passed parameters. The modules
+  main func is `generate(options)`, the function takes a map with options as a
+  parameter.
+
+  ## Options example:
+    options = %{
+      "length" => "5",
+      "numbers" => "false",
+      "uppercase" => "false",
+      "uppercase" => "false"
+    }
+  The option has 4 values, `length`, `numbers`, `uppercase` and `symbols`.
   """
+
+  @allowed_options [:length, :numbers, :uppercase, :symbols]
 
   @doc """
-  Hello world.
+  Generates a password for given options:
 
   ## Examples
+      options = %{
+        "lenght" => "5",
+        "numbers" => "false",
+        "uppercase" => "false",
+        "symbols" => "false"
+      }
 
-      iex> PasswordGen.hello()
-      :world
+      iex> PasswordGen.generate(options)
+      "abcde"
 
+      options = %{
+        "lenght" => "5",
+        "numbers" => "true",
+        "uppercase" => "false",
+        "symbols" => "false"
+      }
+
+      iex> PasswordGen.generate(options)
+      "abcd4"
   """
-  def hello do
-    :world
   end
 end
