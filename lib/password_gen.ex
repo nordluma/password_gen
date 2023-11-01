@@ -55,5 +55,25 @@ defmodule PasswordGen do
     length = String.contains?(length, numbers)
     validate_length_is_integer(length, options)
   end
+
+  defp validate_length_is_integer(false, _options) do
+    {:error, "Only integers allowed for length"}
+  end
+
+  defp validate_length_is_integer(true, options) do
+    length =
+      options["length"]
+      |> String.trim()
+      |> String.to_integer()
+
+    options_without_length = Map.delete(options, "length")
+    option_values = Map.values(options_without_length)
+
+    value =
+      option_values
+      |> Enum.all?(fn x -> String.to_atom(x) |> is_boolean() end)
+
+    validate_option_values_are_boolean(value, length, options_without_length)
+  end
   end
 end
