@@ -40,5 +40,11 @@ defmodule PasswordGen do
       iex> PasswordGen.generate(options)
       "abcd4"
   """
+
+  @spec generate(options :: map()) :: {:ok, bitstring()} | {:error, bitstring()}
+  def generate(options) do
+    length = Map.has_key?(options, "length")
+    validate_length(length, options)
+  end
   end
 end
