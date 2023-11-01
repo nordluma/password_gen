@@ -100,5 +100,37 @@ defmodule PasswordGen do
   defp validate_options(false, length, options) do
     generate_string(length, options)
   end
+
+  defp generate_string(length, options) do
+    options = [:lowercase_letter | options]
+    included = include(options)
+    length = length - length(included)
+    random_strings = generate_random_strings(length, options)
+    strings = included ++ random_strings
+    get_result(strings)
+  end
+
+  defp generate_random_strings(length, options) do
+    Enum.map(1..length, fn _ ->
+      Enum.random(options) |> get()
+    end)
+  end
+
+  defp get_result(string) do
+    string =
+      string
+      |> Enum.shuffle()
+      |> to_string()
+
+    {:ok, string}
+  end
+
+  defp include(options) do
+    options
+    |> Enum.map(&get(&1))
+  end
+
+  defp get(:lowercase_letter) do
+    <<Enum.random(?a..?z)>>
   end
 end
