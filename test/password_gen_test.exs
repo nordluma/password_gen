@@ -58,4 +58,15 @@ defmodule PasswordGenTest do
     refute String.contains?(result, options.uppercase)
     refute String.contains?(result, options.symbols)
   end
+
+  test "returns error when option values are not booleans" do
+    options = %{
+      "length" => "10",
+      "numbers" => "invalid",
+      "uppercase" => "0",
+      "symbols" => "false"
+    }
+
+    assert {:error, _error} = PasswordGen.generate(options)
+  end
 end
