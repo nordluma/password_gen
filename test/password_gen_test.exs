@@ -41,7 +41,7 @@ defmodule PasswordGenTest do
   end
 
   test "length of returned string is the same as in the passed option" do
-    length_option = %{"lenght" => "5"}
+    length_option = %{"length" => "5"}
     {:ok, result} = PasswordGen.generate(length_option)
 
     assert 5 = String.length(result)
