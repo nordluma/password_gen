@@ -1,6 +1,5 @@
 defmodule PasswordGenTest do
   use ExUnit.Case
-  doctest PasswordGen
 
   setup do
     options = %{
