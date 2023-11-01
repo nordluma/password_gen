@@ -75,5 +75,30 @@ defmodule PasswordGen do
 
     validate_option_values_are_boolean(value, length, options_without_length)
   end
+
+  defp validate_option_values_are_boolean(false, _length, _options) do
+    {:error, "Only booleans allowed for option values"}
+  end
+
+  defp validate_option_values_are_boolean(true, length, options) do
+    options = included_options(options)
+    invalid_options? = options |> Enum.any?(&(&1 not in @allowed_options))
+    validate_options(invalid_options?, length, options)
+  end
+
+  defp included_options(options) do
+    Enum.filter(options, fn {_, value} ->
+      value |> String.trim() |> String.to_existing_atom()
+    end)
+    |> Enum.map(fn {key, _} -> String.to_atom(key) end)
+  end
+
+  defp validate_options(true, _length, _options) do
+    {:error, "The only options allowed are numbers, uppercase and symbols"}
+  end
+
+  defp validate_options(false, length, options) do
+    generate_string(length, options)
+  end
   end
 end
