@@ -46,5 +46,14 @@ defmodule PasswordGen do
     length = Map.has_key?(options, "length")
     validate_length(length, options)
   end
+
+  defp validate_length(false, _options), do: {:error, "Please provide a length"}
+
+  defp validate_length(true, options) do
+    numbers = Enum.map(0..9, &Integer.to_string(&1))
+    length = options["length"]
+    length = String.contains?(length, numbers)
+    validate_length_is_integer(length, options)
+  end
   end
 end
