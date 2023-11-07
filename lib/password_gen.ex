@@ -142,4 +142,14 @@ defmodule PasswordGen do
     Enum.random(0..9)
     |> Integer.to_string()
   end
+
+  @symbols "!#$%&()*+,-./:;<=>?@[]^_{}|~"
+
+  defp get(:symbols) do
+    symbols =
+      @symbols
+      |> String.split("", trim: true)
+
+    Enum.random(symbols)
+  end
 end
