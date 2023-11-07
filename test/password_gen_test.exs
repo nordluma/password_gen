@@ -121,7 +121,7 @@ defmodule PasswordGenTest do
   end
 
   test "returns string with uppercase and numbers", %{options_type: options} do
-    options_included = {
+    options_included = %{
       "length" => "10",
       "numbers" => "true",
       "uppercase" => "false",
