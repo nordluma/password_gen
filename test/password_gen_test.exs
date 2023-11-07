@@ -103,4 +103,20 @@ defmodule PasswordGenTest do
     refute String.contains?(result, options.numbers)
     refute String.contains?(result, options.symbols)
   end
+
+  test "returns string with just containing numbers", %{options_type: options} do
+    options_with_numbers = %{
+      "length" => "10",
+      "numbers" => "true",
+      "uppercase" => "false",
+      "symbols" => "false"
+    }
+
+    {:ok, result} = PasswordGen.generate(options_with_numbers)
+
+    assert String.contains?(result, options.numbers)
+
+    refute String.contains?(result, options.symbols)
+    refute String.contains?(result, options.uppercase)
+  end
 end
