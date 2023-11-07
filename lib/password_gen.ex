@@ -133,4 +133,8 @@ defmodule PasswordGen do
   defp get(:lowercase_letter) do
     <<Enum.random(?a..?z)>>
   end
+
+  defp get(:uppercase) do
+    <<Enum.random(?A..?Z)>>
+  end
 end
