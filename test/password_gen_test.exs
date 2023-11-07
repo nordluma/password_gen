@@ -124,7 +124,7 @@ defmodule PasswordGenTest do
     options_included = %{
       "length" => "10",
       "numbers" => "true",
-      "uppercase" => "false",
+      "uppercase" => "true",
       "symbols" => "false"
     }
 
